@@ -7,7 +7,6 @@ import portBilgisiKontrolu as pbk
 def hicbir_sey(x):
     pass
  
- 
 def main():
     kamera_index = pbk.kamera_portu()
     if kamera_index is None:
@@ -16,6 +15,7 @@ def main():
  
     kamera = cv.VideoCapture(kamera_index, cv.CAP_DSHOW)
     kamera.set(cv.CAP_PROP_FPS, 30)
+
  
     cv.namedWindow("Kontroller", cv.WINDOW_NORMAL)
     cv.resizeWindow("Kontroller", 400, 300)
@@ -58,11 +58,8 @@ def main():
             mask_temiz = cv.morphologyEx(mask, cv.MORPH_CLOSE, kernel)
             mask_temiz = cv.morphologyEx(mask_temiz, cv.MORPH_OPEN, kernel)
  
-            # Maskeyi orijinal goruntu uzerine bindirerek de gosterelim,
-            # boylece hangi bolgelerin "kacirildigini" daha net gorursun
             renkli_maske = cv.bitwise_and(frame, frame, mask=mask_temiz)
  
-            # Bilgi metni
             bilgi = frame.copy()
             cv.putText(bilgi, f"H:[{h_alt}-{h_ust}] S:[{s_alt}-{s_ust}] V:[{v_alt}-{v_ust}] K:{kernel_boyut}",
                        (10, 25), cv.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 255), 2)
@@ -89,14 +86,3 @@ def main():
  
 if __name__ == "__main__":
     main()
- 
-
-
-
-
-
-
-
-
-
-
